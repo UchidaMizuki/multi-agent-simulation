@@ -237,6 +237,8 @@ agent_df |>
 ```{julia}
 #| label: プランクトンの個体数の変化の動画
 
+# 上記のグラフとは異なる
+model = initialize_model()
 agent_color(agent) = agent.group == :phyto ? :green : :red
 abmvideo(
     "01_plankton.mp4", model, agent_step!;

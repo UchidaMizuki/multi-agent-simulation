@@ -203,7 +203,7 @@ agent_df, _ = run!(
 )
 ```
 
-    (37750×3 DataFrame
+    (41441×3 DataFrame
        Row │ step   id     group
            │ Int64  Int64  Symbol
     ───────┼──────────────────────
@@ -216,14 +216,14 @@ agent_df, _ = run!(
          7 │     0      7  phyto
          8 │     0      8  phyto
        ⋮   │   ⋮      ⋮      ⋮
-     37744 │   200   2166  phyto
-     37745 │   200   2167  phyto
-     37746 │   200   2168  phyto
-     37747 │   200   2169  phyto
-     37748 │   200   2170  phyto
-     37749 │   200   2171  phyto
-     37750 │   200   2172  phyto
-                37735 rows omitted, 0×0 DataFrame)
+     41435 │   200   2347  phyto
+     41436 │   200   2348  phyto
+     41437 │   200   2349  phyto
+     41438 │   200   2350  phyto
+     41439 │   200   2351  phyto
+     41440 │   200   2352  phyto
+     41441 │   200   2353  phyto
+                41426 rows omitted, 0×0 DataFrame)
 
 ``` julia
 
@@ -268,7 +268,16 @@ agent_df |>
   scale_y_continuous(trans = "log1p")
 ```
 
-![](01_plankton_files/figure-commonmark/unnamed-chunk-7-1.png)
+![](01_plankton_files/figure-commonmark/プランクトンの個体数の変化のグラフ-1.png)
+
+``` julia
+# 上記のグラフとは異なる
+model = initialize_model()
+```
+
+    AgentBasedModel with 220 agents of type Plankton
+     space: periodic continuous space with (70.0, 70.0) extent and spacing=3.5 with velocity updates
+     scheduler: Agents.Schedulers.Randomly
 
 ``` julia
 agent_color(agent) = agent.group == :phyto ? :green : :red
