@@ -4,6 +4,7 @@ format: gfm
 ---
 
 ## プランクトン生態系モデル
+
 https://mas.kke.co.jp/model/plankton/
 
 ### パッケージの読み込み
@@ -31,7 +32,6 @@ using CSV
 library(tidyverse)
 ```
 
-
 ### プランクトンエージェントの設定
 
 ```{julia}
@@ -58,12 +58,11 @@ library(tidyverse)
 end
 ```
 
-
-
 ### モデルの初期化関数
 
 ```{julia}
 #| label: モデルの初期化関数
+#| output: false
 
 # 方向転換の関数 (空間作成関数`ContinuousSpace`に入力)
 function update_vel!(agent, _)
@@ -120,12 +119,11 @@ function initialize_model(;
 end
 ```
 
-
-
 ### エージェントのステップ関数
 
 ```{julia}
 #| label: エージェントのステップ関数
+#| output: false
 
 function agent_step!(agent, model)
     if agent.group == :phyto
@@ -195,12 +193,11 @@ function agent_step!(agent, model)
 end
 ```
 
-
-
 ### プランクトンの個体数の変化
 
 ```{julia}
 #| label: プランクトンの個体数の変化
+#| output: false
 
 model = initialize_model()
 agent_df, _ = run!(
@@ -236,6 +233,7 @@ agent_df |>
 
 ```{julia}
 #| label: プランクトンの個体数の変化の動画
+#| output: false
 
 # 上記のグラフとは異なる
 model = initialize_model()

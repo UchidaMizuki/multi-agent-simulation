@@ -67,11 +67,6 @@ function update_vel!(agent, _)
 
     return
 end
-```
-
-    update_vel! (generic function with 1 method)
-
-``` julia
 
 function initialize_model(;
     n_phyto = 200,
@@ -110,8 +105,6 @@ function initialize_model(;
     return model
 end
 ```
-
-    initialize_model (generic function with 1 method)
 
 ### エージェントのステップ関数
 
@@ -184,72 +177,21 @@ function agent_step!(agent, model)
 end
 ```
 
-    agent_step! (generic function with 1 method)
-
 ### プランクトンの個体数の変化
 
 ``` julia
 model = initialize_model()
-```
-
-    AgentBasedModel with 220 agents of type Plankton
-     space: periodic continuous space with (70.0, 70.0) extent and spacing=3.5 with velocity updates
-     scheduler: Agents.Schedulers.Randomly
-
-``` julia
 agent_df, _ = run!(
     model, agent_step!, 200,
     adata=[:group]
 )
-```
-
-    (41441×3 DataFrame
-       Row │ step   id     group
-           │ Int64  Int64  Symbol
-    ───────┼──────────────────────
-         1 │     0      1  phyto
-         2 │     0      2  phyto
-         3 │     0      3  phyto
-         4 │     0      4  phyto
-         5 │     0      5  phyto
-         6 │     0      6  phyto
-         7 │     0      7  phyto
-         8 │     0      8  phyto
-       ⋮   │   ⋮      ⋮      ⋮
-     41435 │   200   2347  phyto
-     41436 │   200   2348  phyto
-     41437 │   200   2349  phyto
-     41438 │   200   2350  phyto
-     41439 │   200   2351  phyto
-     41440 │   200   2352  phyto
-     41441 │   200   2353  phyto
-                41426 rows omitted, 0×0 DataFrame)
-
-``` julia
 
 dir_plankton = "01_plankton"
-```
-
-    "01_plankton"
-
-``` julia
 file_plankton = dir_plankton * "/agent_df.csv"
-```
-
-    "01_plankton/agent_df.csv"
-
-``` julia
 
 isdir(dir_plankton) || mkdir(dir_plankton)
-```
-
-    true
-
-``` julia
 CSV.write(file_plankton, agent_df)
 ```
-
-    "01_plankton/agent_df.csv"
 
 ``` r
 agent_df <- read_csv("01_plankton/agent_df.csv",
@@ -273,19 +215,7 @@ agent_df |>
 ``` julia
 # 上記のグラフとは異なる
 model = initialize_model()
-```
-
-    AgentBasedModel with 220 agents of type Plankton
-     space: periodic continuous space with (70.0, 70.0) extent and spacing=3.5 with velocity updates
-     scheduler: Agents.Schedulers.Randomly
-
-``` julia
 agent_color(agent) = agent.group == :phyto ? :green : :red
-```
-
-    agent_color (generic function with 1 method)
-
-``` julia
 abmvideo(
     "01_plankton.mp4", model, agent_step!;
     ac = agent_color,
